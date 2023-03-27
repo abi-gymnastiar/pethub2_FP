@@ -10,7 +10,7 @@ class Centers extends Model
     use HasFactory;
 
     protected $table = "centers";
-    protected $fillable = ["name", "slug", "location", "no_animals"];
+    protected $fillable = ["name", "location"];
 
     public function animal(){
         return $this->hasMany(Animals::class);

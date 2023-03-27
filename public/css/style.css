@@ -23,7 +23,7 @@ body.dark-mode {
     background-color: #1a1a1a;
     color: #f2f2f2;
 }
-.bg-danger {
+.bg-orange {
     background-color: darkorange !important;
 }
 .btn-orange {

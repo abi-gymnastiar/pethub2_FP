@@ -2,17 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Centers;
+use App\Models\AnimalType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Animals extends Model
 {
     use HasFactory;
 
     protected $table = "animals";
-    protected $fillable = ["name", "breed", "age", "center_id", "image"];
+    protected $fillable = ["name","animaltype_id","breed", "age", "center_id", "image"];
 
     public function center(){
         return $this->belongsTo(Centers::class);
+    }
+
+    public function animaltype(){
+        return $this->belongsTo(AnimalType::class);
     }
 }

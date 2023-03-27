@@ -12,7 +12,8 @@ class CentersController extends Controller
      */
     public function index()
     {
-        //
+        $centers = Centers::all();
+        return view('centers.index', compact('centers'));
     }
 
     /**
@@ -20,7 +21,8 @@ class CentersController extends Controller
      */
     public function create()
     {
-        //
+        $centers = Centers::all();
+        return view('centers.create', compact('centers'));
     }
 
     /**
@@ -28,7 +30,21 @@ class CentersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+        ],
+        [
+            'name.required' => 'Name can\'t be empty!',
+            'location.required' => 'Where is this? the void? Location can\'t be empty!',
+        ]);
+
+        Centers::create([
+            'name' => $request->name,
+            'location' => $request->location,
+            ]);
+
+        return redirect('/center');
     }
 
     /**
@@ -42,17 +58,36 @@ class CentersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Centers $centers)
+    public function edit($id)
     {
-        //
+        $centers = Centers::findorfail($id);
+        return view('center.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Centers $centers)
+    public function update(Request $request, Centers $centers, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+        ],
+        [
+            'name.required' => 'Name can\'t be empty!',
+            'location.required' => 'Location can\'t be empty!',
+        ]);
+
+        $center = Centers::findorfail($id);
+        
+        $center_data = [
+            'name' => $request->name,
+            'location' => $request->location
+        ];
+
+        $center->update($center_data);
+
+        return view('center.show');
     }
 
     /**
