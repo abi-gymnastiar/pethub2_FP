@@ -33,15 +33,21 @@ class CentersController extends Controller
         $request->validate([
             'name' => 'required',
             'location' => 'required',
+            'telephone' => 'required',
+            'email' => 'required'
         ],
         [
             'name.required' => 'Name can\'t be empty!',
             'location.required' => 'Where is this? the void? Location can\'t be empty!',
+            'telephone.required' => 'ring ring???',
+            'email.required' => "Email can't be empty"
         ]);
 
         Centers::create([
             'name' => $request->name,
             'location' => $request->location,
+            'telephone' => $request->telephone,
+            'email' => $request->email
             ]);
 
         return redirect('/center');
@@ -50,9 +56,10 @@ class CentersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Centers $centers)
+    public function show($id)
     {
-        //
+        $centers = Centers::findorfail($id);
+        return view('centers.show', compact('centers'));
     }
 
     /**
@@ -72,17 +79,23 @@ class CentersController extends Controller
         $request->validate([
             'name' => 'required',
             'location' => 'required',
+            'telephone' => 'required',
+            'email' => 'required'
         ],
         [
             'name.required' => 'Name can\'t be empty!',
             'location.required' => 'Location can\'t be empty!',
+            'telephone.required' => 'ring ring???',
+            'email.required' => "Email can't be empty"
         ]);
 
         $center = Centers::findorfail($id);
         
         $center_data = [
             'name' => $request->name,
-            'location' => $request->location
+            'location' => $request->location,
+            'telephone' => $request->telephone,
+            'email' => $request->email
         ];
 
         $center->update($center_data);

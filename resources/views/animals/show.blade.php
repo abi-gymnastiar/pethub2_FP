@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-    <h1>Animal Detail {{$animals->id}}</h1>
+    <h1>{{$animals->name}}'s Profile</h1>
     <div class="d-flex justify-content-center my-5">
         <div class="card col-sm-6 mx-3 w-50 p-5 bg-dark text-white">
             <div class="card-body d-flex justify-content-center">
@@ -28,6 +28,11 @@
                     <h5>Breed: {{$animals->breed}}</h5>
                     <h5>Age: {{$animals->age}}</h5>
                     <h5>Center: {{$animals->center->name}}</h5>
+                    <h5>
+                        <a href="/center/{{ $animals->center->id }}">
+                            Visit {{ $animals->name }}'s Center!
+                        </a>
+                    </h5>
                 </div>
             </div>
             

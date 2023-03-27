@@ -1,11 +1,11 @@
 @extends('master')
 @section('content')
-    <h1>Daftar Animals 2023</h1>
+    <h1>Animals</h1>
     <div class="row mx-5 justify-content-center">
         @foreach ($animals as $item)
             <div class="card mx-3 bg-dark text-white" style="width: 20rem;">
                 <div class="card-body d-flex flex-column align-items-center">
-                    <h4 class="my-3">Animal {{$item->id}}</h4>
+                    <h4 class="my-3">{{$item->name}}</h4>
                     @if ($item->image)
                         <style>
                             .resize{
@@ -34,7 +34,9 @@
             </div>
         @endforeach
     </div>
+    @if (auth()->check() && auth()->user()->is_admin)
     <div class="d-flex mx-5 my-5 justify-content-center">
         <a href="/animals/create" class="btn btn-orange btn-info mx-5" style="max-width: 18rem;">+Add Animals</a>
     </div>
+    @endif
 @endsection

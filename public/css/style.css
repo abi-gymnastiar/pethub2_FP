@@ -37,3 +37,46 @@ body.dark-mode {
 .form-dark {
     border-color: darkslategrey;
 }
+
+.main-image {
+  position: relative;
+  background: url(https://images.unsplash.com/photo-1570458436416-b8fcccfe883f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) no-repeat center;
+  background-size: cover;
+  height: 600px;
+  overflow: hidden;
+}
+
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #f2f2f2;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.container h1{
+  margin: 0;
+  font-size: 70px;
+}
+
+.container h1 span{
+  border: 6px solid white;
+  padding: 6px 14px;
+  display: inline-block;
+}
+
+.button{
+  color: #313131;
+  padding: 10px 24px;
+  background: #f1f1f1;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: .6s;
+}
+
+.button:hover {
+  opacity: .6;
+}

@@ -17,21 +17,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 //Route::get('/animals/create', [AnimalsController::class, 'create']);
 Route::get('/animals', [AnimalsController::class, 'index']);
 Route::post('/animals', [AnimalsController::class, 'store']);
-Route::get('/animals/create', [AnimalsController::class, 'create']);
+Route::get('/animals/create', [AnimalsController::class, 'create'])->middleware('App\Http\Middleware\Admin');
 Route::get('/animals/{animals_id}', [AnimalsController::class, 'show']);
-Route::get('/animals/{animals_id}/edit', [AnimalsController::class, 'edit']);
+Route::get('/animals/{animals_id}/edit', [AnimalsController::class, 'edit'])->middleware('App\Http\Middleware\Admin');
 Route::put('/animals/{animals_id}', [AnimalsController::class, 'update']);
 
-Route::get('/center/create', [CentersController::class, 'create']);
+Route::get('/center/create', [CentersController::class, 'create'])->middleware('App\Http\Middleware\Admin');
 Route::get('/center', [CentersController::class, 'index']);
 Route::post('/center', [CentersController::class, 'store']);
+Route::get('/center/{centers_id}', [CentersController::class, 'show']);
 Route::get('/center/{center_id}/edit', [CentersController::class, 'edit']);
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
