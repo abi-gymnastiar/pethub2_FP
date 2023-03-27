@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AnimalsController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ Route::get('/animals/create', [AnimalsController::class, 'create']);
 Route::get('/animals/{animals_id}', [AnimalsController::class, 'show']);
 Route::get('/animals/{animals_id}/edit', [AnimalsController::class, 'edit']);
 Route::put('/animals/{animals_id}', [AnimalsController::class, 'update']);
+
+Route::get('/login', [LoginController::class, 'index']);

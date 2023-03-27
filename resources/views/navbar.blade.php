@@ -1,4 +1,4 @@
-<div class="bg-dark text-white py-2">
+<div class="bg-danger text-white py-2">
     <div class="d-flex justify-content-between mx-5">
         <h3>Pethub Adoption</h3>
         <div class="d-flex justify-content-around text-primary align-items-center">

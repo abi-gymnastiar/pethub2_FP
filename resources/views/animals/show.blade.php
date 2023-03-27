@@ -32,9 +32,9 @@
             </div>
             
             <div class="d-flex justify-content-between">
-                <a href="/animals" class="btn btn-light mt-4 mx-2"><< Back</a>
+                <a href="/animals" class="btn btn-dark mt-4 mx-2"><< Back</a>
                 <div class="d-flex justify-content-end">
-                    <a href="/animals/{{$animals->id}}/edit" class="btn btn-warning mt-4 mx-2">Edit</a>
+                    <a href="/animals/{{$animals->id}}/edit" class="btn btn-orange btn-info mt-4 mx-2">Edit</a>
                 </div>
             </div>
         </div>

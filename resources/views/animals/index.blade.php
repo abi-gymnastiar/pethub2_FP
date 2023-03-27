@@ -3,7 +3,7 @@
     <h1>Daftar Animals 2023</h1>
     <div class="row mx-5 justify-content-center">
         @foreach ($animals as $item)
-            <div class="card mx-3" style="width: 20rem;">
+            <div class="card mx-3 bg-dark text-white" style="width: 20rem;">
                 <div class="card-body d-flex flex-column align-items-center">
                     <h4 class="my-3">Animal {{$item->id}}</h4>
                     @if ($item->image)
@@ -29,12 +29,12 @@
                         <h5>Name: {{$item->name}}</h5>
                         <h5>Center: {{$item->center->name}}</h5>
                     </div>
-                    <a href="/animals/{{$item->id}}" class="btn btn-sm btn-info">Details</a>
+                    <a href="/animals/{{$item->id}}" class="btn btn-orange btn-info">Details</a>
                 </div>
             </div>
         @endforeach
     </div>
     <div class="d-flex mx-5 my-5 justify-content-center">
-        <a href="/animals/create" class="btn btn-primary mx-5" style="max-width: 18rem;">+Add Animals</a>
+        <a href="/animals/create" class="btn btn-orange btn-info mx-5" style="max-width: 18rem;">+Add Animals</a>
     </div>
 @endsection
