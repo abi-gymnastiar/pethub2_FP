@@ -12,7 +12,7 @@ class Animals extends Model
     use HasFactory;
 
     protected $table = "animals";
-    protected $fillable = ["name","animaltype_id","breed", "age", "center_id", "image"];
+    protected $fillable = ["name","animaltype_id","breed", "age", "center_id", "image", "desc"];
 
     public function center(){
         return $this->belongsTo(Centers::class);
@@ -21,4 +21,8 @@ class Animals extends Model
     public function animaltype(){
         return $this->belongsTo(AnimalType::class);
     }
+
+    // public function adoptionplan(){
+    //     return $this->hasMany(Animals::class);
+    // }
 }

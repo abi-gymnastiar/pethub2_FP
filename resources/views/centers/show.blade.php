@@ -14,12 +14,19 @@
                 </div>
             </div>
             
-            <div class="d-flex justify-content-between">
-                <a href="/center" class="btn btn-dark mt-4 mx-2"><< Back</a>
-                <div class="d-flex justify-content-end">
-                    <a href="/center/{{$centers->id}}/edit" class="btn btn-orange btn-info mt-4 mx-2">Edit</a>
+            <form action="/center/{{$centers->id}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('delete')
+                <div class="d-flex justify-content-between">
+                    <a href="/center" class="btn btn-dark mt-4 mx-2"><< Back</a>
+                    @if (auth()->check() && auth()->user()->is_admin)
+                        <div class="d-flex justify-content-end">
+                            <a href="/center/{{$centers->id}}/edit" class="btn btn-orange btn-info mt-4 mx-2">Edit</a>
+                            <input type="submit" class="btn btn-danger mt-4 mx-2" value="Delete">
+                        </div>
+                    @endif
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection

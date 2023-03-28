@@ -36,6 +36,16 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" class="form-control form-dark bg-dark color-dark text-white" name="desc" placeholder="Enter necessary description">
+                            @error('desc')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
         
                         <div class="form-group">
                             <label>Center</label>

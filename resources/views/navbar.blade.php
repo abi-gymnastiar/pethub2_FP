@@ -23,6 +23,7 @@
                 <button typle="submit" class="btn btn-link">Logout</button>
             </form>
             <h5 class="mx-2"><i class="bi bi-person-circle"></i> {{ auth()->user()->name }}</h5>
+            <a href="{{ route('user_profile') }}">Profile</a>
             @else
                 <h5 class="mx-2">
                     <a href="/login"><i class="bi bi-box-arrow-in-right"></i> Log in</a>

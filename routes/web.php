@@ -1,8 +1,11 @@
 <?php
+
+use App\Http\Controllers\AdoptionPlanController;
 use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\CentersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Models\AdoptionPlan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,12 +30,14 @@ Route::get('/animals/create', [AnimalsController::class, 'create'])->middleware(
 Route::get('/animals/{animals_id}', [AnimalsController::class, 'show']);
 Route::get('/animals/{animals_id}/edit', [AnimalsController::class, 'edit'])->middleware('App\Http\Middleware\Admin');
 Route::put('/animals/{animals_id}', [AnimalsController::class, 'update']);
+Route::delete('/animals/{animals_id}', [AnimalsController::class, 'destroy'])->middleware('App\Http\Middleware\Admin');
 
 Route::get('/center/create', [CentersController::class, 'create'])->middleware('App\Http\Middleware\Admin');
 Route::get('/center', [CentersController::class, 'index']);
 Route::post('/center', [CentersController::class, 'store']);
 Route::get('/center/{centers_id}', [CentersController::class, 'show']);
 Route::get('/center/{center_id}/edit', [CentersController::class, 'edit']);
+Route::delete('/center/{centers}', [CentersController::class, 'destroy'])->middleware('App\Http\Middleware\Admin');
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -40,3 +45,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+//Route::post('/', [AdoptionPlanController::class, 'store'])->middleware('auth')->name('adoptionplan.store');
+//Route::post('/', [AdoptionPlanController::class, 'store'])->middleware('auth')->name('adoptionplan.store');
+Route::post('/animals/{animals}', [AdoptionPlanController::class, 'store'])->middleware('auth')->name('adoptionplan.store');

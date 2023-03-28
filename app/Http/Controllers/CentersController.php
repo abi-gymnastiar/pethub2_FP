@@ -106,8 +106,11 @@ class CentersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Centers $centers)
+    public function destroy($id)
     {
-        //
+        $animals = Centers::findorfail($id);
+        $animals->delete();
+
+        return redirect('/center');
     }
 }

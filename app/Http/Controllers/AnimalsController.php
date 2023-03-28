@@ -41,6 +41,7 @@ class AnimalsController extends Controller
             'breed' => 'required',
             'age' => 'required|numeric',
             'center_id' => 'required',
+            'desc' => 'required|max:2048',
             'image' => 'image|file|max:2048'
         ],
         [
@@ -48,6 +49,7 @@ class AnimalsController extends Controller
             'breed.required' => 'NRP can\'t be empty!',
             'age.required' => 'Jurusan can\'t be empty!',
             'center_id' => 'Please choose your angkatan',
+            'desc.required' => 'desc can\'t be empty!'
         ]);
 
         Animals::create([
@@ -55,6 +57,7 @@ class AnimalsController extends Controller
             'center_id' => $request->center_id,
             'breed' => $request->breed,
             'age' => $request->age,
+            'desc' => $request->desc,
             'image' => $request->file('image')->store('post-images')
             ]);
 
@@ -105,12 +108,14 @@ class AnimalsController extends Controller
             'breed' => 'required',
             'age' => 'required|numeric',
             'center_id' => 'required',
+            'desc' => 'required|max:2048',
             'image' => 'image|file|max:2048'
         ],
         [
             'name.required' => 'name can\'t be empty!',
             'breed.required' => 'breed can\'t be empty!',
             'age.required' => 'age can\'t be empty!',
+            'desc.required' => 'desc can\'t be empty!',
             'center_id' => 'Please choose your center',
         ]);
 
@@ -121,6 +126,7 @@ class AnimalsController extends Controller
             'center_id' => $request->center_id,
             'breed' => $request->breed,
             'age' => $request->age,
+            'desc' => $request->desc,
         ];
 
         $animals->update($animals_data);
@@ -131,8 +137,11 @@ class AnimalsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Animals $animals)
+    public function destroy($id)
     {
-        //
+        $animals = Animals::findorfail($id);
+        $animals->delete();
+
+        return redirect('/animals');
     }
 }

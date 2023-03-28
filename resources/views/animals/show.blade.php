@@ -28,6 +28,9 @@
                     <h5>Breed: {{$animals->breed}}</h5>
                     <h5>Age: {{$animals->age}}</h5>
                     <h5>Center: {{$animals->center->name}}</h5>
+                    <h5>Description: <br>
+                        <h6>{{ $animals->desc}}</h6>
+                    </h5>
                     <h5>
                         <a href="/center/{{ $animals->center->id }}">
                             Visit {{ $animals->name }}'s Center!
@@ -35,13 +38,25 @@
                     </h5>
                 </div>
             </div>
-            
-            <div class="d-flex justify-content-between">
-                <a href="/animals" class="btn btn-dark mt-4 mx-2"><< Back</a>
-                <div class="d-flex justify-content-end">
-                    <a href="/animals/{{$animals->id}}/edit" class="btn btn-orange btn-info mt-4 mx-2">Edit</a>
+
+            <form action="/animals/{{$animals->id}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('delete')
+                <div class="d-flex justify-content-between">
+                    <a href="/animals" class="btn btn-dark mt-4 mx-2"><< Back</a>
+                    @if (auth()->check() && auth()->user()->is_admin)
+                        <div class="d-flex justify-content-end">
+                            <a href="/animals/{{$animals->id}}/edit" class="btn btn-orange btn-info mt-4 mx-2">Edit</a>
+                            <input type="submit" class="btn btn-danger mt-4 mx-2" value="Delete">
+                        </div>
+                    @endif
                 </div>
-            </div>
+            </form>
+
+            <form action="{{ route('adoptionplan.store', $animals) }}" method="POST">
+                @csrf
+                <input type="submit" class="btn btn-danger mt-4 mx-2" value="Adopt Me">
+            </form>
         </div>
     </div>
 @endsection
