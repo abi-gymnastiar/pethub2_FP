@@ -45,6 +45,7 @@ Route::get('/center', [CentersController::class, 'index']);
 Route::post('/center', [CentersController::class, 'store']);
 Route::get('/center/{centers_id}', [CentersController::class, 'show']);
 Route::get('/center/{center_id}/edit', [CentersController::class, 'edit']);
+Route::put('/center/{center_id}', [CentersController::class, 'update']);
 Route::delete('/center/{centers}', [CentersController::class, 'destroy'])->middleware('App\Http\Middleware\Admin');
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');

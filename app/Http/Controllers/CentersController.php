@@ -50,7 +50,7 @@ class CentersController extends Controller
             'email' => $request->email
             ]);
 
-        return redirect('/center');
+        return redirect('/center', compact('centers'));
     }
 
     /**
@@ -68,39 +68,33 @@ class CentersController extends Controller
     public function edit($id)
     {
         $centers = Centers::findorfail($id);
-        return view('center.edit');
+        return view('centers.edit', compact('centers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Centers $centers, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
             'location' => 'required',
-            'telephone' => 'required',
-            'email' => 'required'
         ],
         [
             'name.required' => 'Name can\'t be empty!',
             'location.required' => 'Location can\'t be empty!',
-            'telephone.required' => 'ring ring???',
-            'email.required' => "Email can't be empty"
         ]);
-
-        $center = Centers::findorfail($id);
-        
+    
+        $center = Centers::findOrFail($id);
+            
         $center_data = [
             'name' => $request->name,
             'location' => $request->location,
-            'telephone' => $request->telephone,
-            'email' => $request->email
         ];
-
+    
         $center->update($center_data);
-
-        return view('center.show');
+    
+        return redirect('/center');
     }
 
     /**
@@ -111,6 +105,6 @@ class CentersController extends Controller
         $animals = Centers::findorfail($id);
         $animals->delete();
 
-        return redirect('/center');
+        return redirect('/center', compact('centers'));
     }
 }

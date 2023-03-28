@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-    <h1>Edit Center {{$camins->id}}</h1>
+    <h1>Edit Center {{$centers->id}}</h1>
     <form action="/center/{{$centers->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('put')

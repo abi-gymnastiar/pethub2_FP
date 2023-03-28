@@ -108,14 +108,11 @@ class AnimalsController extends Controller
             'breed' => 'required',
             'age' => 'required|numeric',
             'center_id' => 'required',
-            'desc' => 'required|max:2048',
-            'image' => 'image|file|max:2048'
         ],
         [
             'name.required' => 'name can\'t be empty!',
             'breed.required' => 'breed can\'t be empty!',
             'age.required' => 'age can\'t be empty!',
-            'desc.required' => 'desc can\'t be empty!',
             'center_id' => 'Please choose your center',
         ]);
 
@@ -126,7 +123,6 @@ class AnimalsController extends Controller
             'center_id' => $request->center_id,
             'breed' => $request->breed,
             'age' => $request->age,
-            'desc' => $request->desc,
         ];
 
         $animals->update($animals_data);
@@ -144,4 +140,5 @@ class AnimalsController extends Controller
 
         return redirect('/animals');
     }
+
 }
