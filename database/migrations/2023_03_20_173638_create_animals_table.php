@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('breed');
             $table->integer('age');
             $table->string('image')->nullable();
-            $table->string('center_id')->constrained();
+            $table->string('center_id')->constrained()->nullable();
             $table->text('desc')->nullable();
             $table->integer('animaltype_id')->nullable();
             $table->timestamps();

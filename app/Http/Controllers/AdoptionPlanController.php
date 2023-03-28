@@ -36,6 +36,7 @@ class AdoptionPlanController extends Controller
 
         $adoptionPlan = AdoptionPlan::create([
             'animal_id' => $animals->id,
+            'user_id' => $user->id,
             'adopter_name' => $user->name,
             'adopter_email' => $user->email,
         ]);

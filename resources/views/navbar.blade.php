@@ -18,12 +18,13 @@
                 <a href="/">About Us</a>
             </h5>
             @auth
-            <form action="/logout" method="post">
-                @csrf
-                <button typle="submit" class="btn btn-link">Logout</button>
-            </form>
-            <h5 class="mx-2"><i class="bi bi-person-circle"></i> {{ auth()->user()->name }}</h5>
-            <a href="{{ route('user_profile') }}">Profile</a>
+            <h5><a href="{{ route('profile') }}">Profile</a></h5>
+            <h4 class="mx-2"> <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
+          </h4>
+          <form action="/logout" method="post">
+            @csrf
+            <button typle="submit" class="btn btn-link">Logout</button>
+        </form>
             @else
                 <h5 class="mx-2">
                     <a href="/login"><i class="bi bi-box-arrow-in-right"></i> Log in</a>

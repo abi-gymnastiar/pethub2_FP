@@ -27,15 +27,19 @@
                     <h5>Name: {{$animals->name}}</h5>
                     <h5>Breed: {{$animals->breed}}</h5>
                     <h5>Age: {{$animals->age}}</h5>
+                    @if ($animals->center)
                     <h5>Center: {{$animals->center->name}}</h5>
+                    @endif
                     <h5>Description: <br>
                         <h6>{{ $animals->desc}}</h6>
                     </h5>
+                    @if($animals->center)
                     <h5>
                         <a href="/center/{{ $animals->center->id }}">
                             Visit {{ $animals->name }}'s Center!
                         </a>
                     </h5>
+                    @endif
                 </div>
             </div>
 

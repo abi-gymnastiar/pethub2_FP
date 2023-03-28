@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdoptionPlanController;
-use App\Http\Controllers\AnimalsController;
-use App\Http\Controllers\CentersController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Models\AdoptionPlan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AnimalsController;
+use App\Http\Controllers\CentersController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdoptionPlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+
 
 //Route::get('/animals/create', [AnimalsController::class, 'create']);
 Route::get('/animals', [AnimalsController::class, 'index']);

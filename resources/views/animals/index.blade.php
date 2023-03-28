@@ -27,7 +27,9 @@
                     {{-- <i class='fas fa-id-badge' style='font-size:180px'></i> --}}
                     <div class="data my-3">
                         <h5>Name: {{$item->name}}</h5>
+                        @if ($item->center)
                         <h5>Center: {{$item->center->name}}</h5>
+                        @endif
                     </div>
                     <a href="/animals/{{$item->id}}" class="btn btn-orange btn-info">Details</a>
                 </div>
