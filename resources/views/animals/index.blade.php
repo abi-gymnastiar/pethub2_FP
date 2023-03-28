@@ -3,42 +3,25 @@
     <h1>Animals</h1>
     <div class="row mx-5 justify-content-center">
         @foreach ($animals as $item)
-            <div class="card mx-3 bg-dark text-white" style="width: 20rem;">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <h4 class="my-3">{{$item->name}}</h4>
+            <div class="card mx-2 bg-dark text-white animal-card" style="width: 300px;">
+                <a href="/animals/{{$item->id}}">
                     @if ($item->image)
-                        <style>
-                            .resize{
-                                width:60%;
-                                height:180px;
-                            }
-                            img {
-                                width:100%;
-                                height:100%;
-                                object-fit:cover;
-                            }
-                        </style>
-                        <div class = "resize">
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="animal photo">
+                        <div style="width: 100%; height: 300px; margin: 10px 0; position: relative;">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="animal photo" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="text-center" style="position: absolute; bottom: 0; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.6);">
+                                <h5 class="mb-0 animal-name">{{$item->name}}</h5>
+                            </div>
                         </div>
                     @else
                         <i class='fas fa-id-badge' style='font-size:180px'></i>
                     @endif
-                    {{-- <i class='fas fa-id-badge' style='font-size:180px'></i> --}}
-                    <div class="data my-3">
-                        <h5>Name: {{$item->name}}</h5>
-                        @if ($item->center)
-                        <h5>Center: {{$item->center->name}}</h5>
-                        @endif
-                    </div>
-                    <a href="/animals/{{$item->id}}" class="btn btn-orange btn-info">Details</a>
-                </div>
+                </a>
             </div>
         @endforeach
     </div>
     @if (auth()->check() && auth()->user()->is_admin)
     <div class="d-flex mx-5 my-5 justify-content-center">
-        <a href="/animals/create" class="btn btn-orange btn-info mx-5" style="max-width: 18rem;">+Add Animals</a>
+        <a href="/animals/create" class="btn btn-orange btn-info mx-5" style="width: 300px;">+Add Animals</a>
     </div>
     @endif
 @endsection

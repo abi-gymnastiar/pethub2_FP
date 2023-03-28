@@ -59,7 +59,9 @@
 
             <form action="{{ route('adoptionplan.store', $animals) }}" method="POST">
                 @csrf
-                <input type="submit" class="btn btn-danger mt-4 mx-2" value="Adopt Me">
+                <div class="d-flex justify-content-end">
+                    <input type="submit" class="btn btn-danger mt-4 mx-2" value="Adopt Me">
+                </div>
             </form>
         </div>
     </div>
