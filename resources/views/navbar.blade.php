@@ -14,9 +14,6 @@
             <h5 class="mx-2">
                 <a href="/center">Centers</a>
             </h5>
-            <h5 class="mx-2">
-                <a href="/">About Us</a>
-            </h5>
             @auth
             <h5><a href="{{ route('profile') }}">Profile</a></h5>
             <h4 class="mx-2"> <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
