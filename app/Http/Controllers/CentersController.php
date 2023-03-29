@@ -50,7 +50,7 @@ class CentersController extends Controller
             'email' => $request->email
             ]);
 
-        return redirect('/center', compact('centers'));
+        return redirect('/center');
     }
 
     /**
@@ -105,6 +105,6 @@ class CentersController extends Controller
         $animals = Centers::findorfail($id);
         $animals->delete();
 
-        return redirect('/center', compact('centers'));
+        return redirect('/center');
     }
 }
