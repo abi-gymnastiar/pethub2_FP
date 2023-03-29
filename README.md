@@ -47,7 +47,6 @@
     - edit detail hewan
         dapat diakses dengan meng-click tombol edit pada detail hewan (hanya dapat diakses oleh admin)
         ![animals-edit](https://user-images.githubusercontent.com/95100144/228530288-94b36238-25ed-4c99-939c-3427d0dc0e23.png)
-        ![animals-afteredit](https://user-images.githubusercontent.com/95100144/228530442-aa850195-234d-48c4-9f60-12d45abe2413.png)
     - delete hewan
         dapat diakses dengan meng-click tombol delete pada detail hewan (hanya dapat diakses oleh admin)
     - Menambah hewan kedalam list adopsi
