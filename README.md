@@ -1,66 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# FP-ALPRO
+- Abiansyah Adzani Gymnastiar
+- Ariel Pratama Menlolo
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Features
+- Register dan login account
+- Melihat profile page
+- Melihat hewan-hewan yang dapat di adopsi
+- Menambahkan hewan kedalam Adoption Plan user
+- Melihat list hewan-hewan Adoption Plan user
+- Melihat Pethub Centers yang ada
+- Menambahkan hewan ke website (admin)
+- Update detail hewan (admin)
+- Menghapus hewan (admin)
+- Menambah center baru ke website (admin)
+- Update informasi center (admin)
+- Delete center (admin)
 
-## About Laravel
+## Tampilan dan fitur website:
+- home ('/')
+    ![home](https://user-images.githubusercontent.com/95100144/228527792-6a1a50d0-bfbf-4936-8e2d-cdec8eb3262c.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- registrasi dan login
+    ![registration](https://user-images.githubusercontent.com/95100144/228528146-de8d0586-6ac6-4880-9045-0e3e5f757471.png)
+    ![login](https://user-images.githubusercontent.com/95100144/228528162-afde4801-1f09-4a3f-9e54-f2039c2a05c8.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- promote user menjadi admin
+    dilakukan dengan cara mengganti attribute is_admin pada user menjadi 1 (true) di phpmyadmin
+    ![admin-change](https://user-images.githubusercontent.com/95100144/228528462-19c1b531-8d8e-4679-a4d8-d218a1f5a50c.png)
+    
+- list hewan ('/animals')
+    ![animals-admin](https://user-images.githubusercontent.com/95100144/228529200-fbd379e0-40e8-47b5-9dd8-7044f9ed8ae7.png)
+    tombol "+Add Animals" hanya bisa dilihat dan diakses jika user merupakan admin
+    
+    - storage link
+        sebelum dapat menampilkan gambar hewan, perlu dilakukan storage link terlebih dahulu. Cukup lakukan ```php artisan storage:link``` di terminal
+    
+    - menambah hewan
+        admin dapat melakukan penambahan hewan dengan tombol "+Add Animals"
+        ![animals-create](https://user-images.githubusercontent.com/95100144/228529886-8c13e664-5acc-4395-9da8-44804de2604c.png)
+        ![animals-after-create](https://user-images.githubusercontent.com/95100144/228529921-a825adfd-0eb8-4a59-95d1-044814b999f2.png)
+    
+    - melihat detail hewan
+        dapat diakses dengan meng-click gambar hewan
+        ![animal-show-admin](https://user-images.githubusercontent.com/95100144/228530062-f093a69d-25e9-4457-9406-7f667b48c276.png)
+    
+    - edit detail hewan
+        dapat diakses dengan meng-click tombol edit pada detail hewan (hanya dapat diakses oleh admin)
+        ![animals-edit](https://user-images.githubusercontent.com/95100144/228530288-94b36238-25ed-4c99-939c-3427d0dc0e23.png)
+        ![animals-afteredit](https://user-images.githubusercontent.com/95100144/228530442-aa850195-234d-48c4-9f60-12d45abe2413.png)
+    - delete hewan
+        dapat diakses dengan meng-click tombol delete pada detail hewan (hanya dapat diakses oleh admin)
+    - Menambah hewan kedalam list adopsi
+        dapat diakses dengan meng-click tombol adopt me pada detail hewan. list hewan yang ditambahkan dapat dilihat di profile user
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- profil user ('/profile')
+    menampilkan nama user dan juga list adoption plan yang sudah ditambahkan
+    ![profile](https://user-images.githubusercontent.com/95100144/228531032-8e427ac9-c189-471f-96e4-0959d97f9b3b.png)
 
-## Learning Laravel
+## Authentication
+- Peojek ini menggunakan sistem middleware dari laravel. Pada website ini, kita dapat membuat user baru dan melimit apa saja yang bisa dilakukan oleh guest, user, dan admin. Pengimplementasiannya dapat dilihat sebagai berikut
+    ```
+    Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+    ```
+    ```
+    Route::get('/animals/create', [AnimalsController::class, 'create'])->middleware('App\Http\Middleware\Admin');
+    ```
+    dengan menggunakan middleware('auth') kita dapat membuat route hanya bisa diakses jika sudah login, sedangkan middleware('App\Http\Middleware\Admin') digunakan untuk akses admin
+    
+- Akses admin sendiri diimplementasikan dengan menambahkan Admin.php dalam app/Http/Middleware/ yang berisi
+    ```
+    class Admin
+    {
+        /**
+         * Handle an incoming request.
+         *
+         * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+         */
+        public function handle(Request $request, Closure $next): Response
+        {
+            if(!auth()->check() || !auth()->user()->is_admin)
+            {
+                abort(403);
+            }
+            return $next($request);
+        }
+    }
+    ```
+    dan menambahkan ``` 'auth' => \App\Http\Middleware\Authenticate::class ``` pada kernel.php. Dengan begitu, seluruh user yang memiliki value 'true' dalam attribute 'is_admin' merupakan Admin
+    
+## CRUD Animal
+Projek ini memiliki 2 tabel database dengan keempat fitur CRUD-nya. salah satunya adalah tabel animals, dimana Read dapat diakses guest, user dan admin sedangkan Create, Update, dan Delete hanya bisa diakses oleh admin.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### References and special thanks:
+- Pelatihan dari admin alpro beserta link repositori yang diberikan
+- Web Programming UNPAS (youtube)
+- https://www.youtube.com/watch?v=6ubzdIeb4XI&list=LL&index=1&t=344s (youtube)
+- stack overflow
