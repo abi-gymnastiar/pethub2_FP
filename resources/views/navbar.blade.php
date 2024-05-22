@@ -16,17 +16,25 @@
             </h5>
             @auth
             <h5><a href="{{ route('profile') }}">Profile</a></h5>
-            <h4 class="mx-2"> <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
+          <h4 class="mx-2"> <i class="bi bi-person-circle"></i>
           </h4>
           <form action="/logout" method="post">
             @csrf
             <button typle="submit" class="btn btn-link">Logout</button>
-        </form>
+          </form>
             @else
                 <h5 class="mx-2">
                     <a href="/login"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
                 </h5>
             @endauth
+            <div class="d-flex justify-content-start align-items-center">
+              <form action="{{ route('search') }}" method="get">
+                  <div class="input-group">
+                      <input type="text" class="form-control" name="query" placeholder="Search">
+                      <button class="btn btn-light" type="submit">Search</button>
+                  </div>
+              </form>
+          </div>
         </div>
     </div>
 </div>
