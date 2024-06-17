@@ -1,41 +1,27 @@
 @extends('master')
 @section('content')
     <h1>Search Results</h1>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Breed</th>
-                                <th>Age</th>
-                                <th>Center</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($animals as $item)
-                            <tr>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->breed}}</td>
-                                <td>{{$item->age}}</td>
-                                <td>{{$item->center->name}}</td>
-                                <td>
-                                    <a href="/animals/{{$item->id}}" class="btn btn-primary">Detail</a>
-                                    <a href="/animals/{{$item->id}}/edit" class="btn btn-warning">Edit</a>
-                                    <form action="/animals/{{$item->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+
+    @if($results->isEmpty())
+        <p>No results found.</p>
+    @else
+    <div class="row mx-5 justify-content-center">
+        @foreach ($results as $item)
+            <div class="card mx-2 bg-dark text-white animal-card" style="width: 300px;">
+                <a href="/animals/{{$item->id}}">
+                    @if ($item->image)
+                        <div style="width: 100%; height: 300px; margin: 10px 0; position: relative;">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="animal photo" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="text-center" style="position: absolute; bottom: 0; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.6);">
+                                <h5 class="mb-0 animal-name">{{$item->name}}</h5>
+                            </div>
+                        </div>
+                    @else
+                        <i class='fas fa-id-badge' style='font-size:180px'></i>
+                    @endif
+                </a>
             </div>
-        </div>
+        @endforeach
     </div>
+    @endif
+@endsection
