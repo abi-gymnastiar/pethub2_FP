@@ -1,3 +1,28 @@
+<style>
+    .navbar-link {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-link:hover {
+        color: black;
+    }
+
+    .navbar-button {
+        color: white;
+        text-decoration: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-button:hover {
+        color: white;
+    }
+</style>
+
 <div class="bg-orange text-white py-2">
     <div class="d-flex justify-content-between mx-5">
         <h3>
@@ -6,35 +31,38 @@
         </h3>
         <div class="d-flex justify-content-start align-items-center">
             <h5 class="mx-2">
-                <a href="/">Home</a>
+                <a href="/" class="navbar-link">Home</a>
             </h5>
             <h5 class="mx-2">
-                <a href="/animals">Animals</a>
+                <a href="/animals" class="navbar-link">Animals</a>
             </h5>
             <h5 class="mx-2">
-                <a href="/center">Centers</a>
+                <a href="/center" class="navbar-link">Centers</a>
             </h5>
             @auth
-            <h5><a href="{{ route('profile') }}">Profile</a></h5>
-          <h4 class="mx-2"> <i class="bi bi-person-circle"></i>
-          </h4>
-          <form action="/logout" method="post">
-            @csrf
-            <button typle="submit" class="btn btn-link">Logout</button>
-          </form>
+            <h5 class="mx-2">
+                <a href="{{ route('profile') }}" class="navbar-link">Profile</a>
+            </h5>
+            <h4 class="mx-2">
+                <i class="bi bi-person-circle" style="color: white;"></i>
+            </h4>
+            <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="navbar-button">Logout</button>
+            </form>
             @else
-                <h5 class="mx-2">
-                    <a href="/login"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
-                </h5>
+            <h5 class="mx-2">
+                <a href="/login" class="navbar-link"><i class="bi bi-box-arrow-in-right"></i> Log in</a>
+            </h5>
             @endauth
             <div class="d-flex justify-content-start align-items-center">
-              <form action="{{ route('search') }}" method="get">
-                  <div class="input-group">
-                      <input type="text" class="form-control" name="query" placeholder="Search">
-                      <button class="btn btn-light" type="submit">Search</button>
-                  </div>
-              </form>
-          </div>
+                <form action="{{ route('search') }}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" placeholder="Search">
+                        <button class="btn btn-light" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
